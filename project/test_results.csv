@@ -1,0 +1,37 @@
+request_id,request_date,cash_balance,inventory_value,response
+1,2025-04-01,45059.7,4940.299999999999,"The requested paper supplies cannot be delivered by April 15, 2025. The estimated delivery dates are as follows:
+- A4 glossy paper: April 6, 2026
+- Heavy cardstock (white): April 3, 2026
+- Colored paper (assorted colors): April 3, 2026."
+2,2025-04-03,45059.7,4940.299999999999,"Order placed for 500 sheets of colorful poster paper, 300 rolls of streamers, and 200 balloons for the parade. Delivery is scheduled for April 15, 2025."
+3,2025-04-04,45059.7,4940.299999999999,"The delivery dates for your order are as follows: A4 paper will be delivered on 2026-04-09, A3 paper will be delivered on 2026-04-09, and printer paper will be delivered on 2026-04-06. Since these dates exceed the required delivery date of April 15, 2025, the order cannot be fulfilled in time for your upcoming conference."
+4,2025-04-05,45059.7,4940.299999999999,"The estimated delivery date for both items (500 sheets of high-quality recycled cardstock and 250 sheets of A4 size printer paper) is April 6, 2026. Unfortunately, this delivery date does not meet your requested delivery date of April 15, 2025."
+5,2025-04-05,45059.7,4940.299999999999,"The items ordered (500 sheets of 8.5""x11"" colored paper, 300 sheets of cardstock in various colors, and 200 rolls of decorative washi tape) will be delivered on April 6, 2026."
+6,2025-04-06,45059.7,4940.299999999999,"The supplies will be delivered on April 6, 2026, which is after the requested date of April 15, 2025."
+7,2025-04-07,45059.7,4940.299999999999,"The estimated delivery date for all items is April 6, 2026, which is not before your required date of April 15, 2025."
+8,2025-04-07,45059.7,4940.299999999999,"The delivery dates for the paper supplies are inconsistent with the requested delivery date of April 15, 2025. The A4 glossy paper and A5 colored paper will be delivered on April 9, 2026, while the A4 matte paper and A4 recycled paper will arrive on April 6, 2026."
+9,2025-04-07,45059.7,4940.299999999999,"Order placed for 200 sheets of A4 white printer paper, 100 sheets of A3 glossy paper, and 50 packets of 100% recycled kraft paper envelopes. Delivery is scheduled for April 10, 2025."
+13,2025-04-08,45059.7,4940.299999999999,"The order for 500 sheets of A4 printing paper and 200 sheets of cardstock cannot be delivered by April 10, 2025, as the estimated delivery date for both items is April 6, 2026."
+12,2025-04-08,45059.7,4940.299999999999,"The delivery dates are as follows: 200 sheets of colorful cardstock will be delivered on April 6, 2026; 500 sheets of standard printer paper will also be delivered on April 6, 2026; and 100 paper napkins will be delivered on April 3, 2026."
+10,2025-04-08,45059.7,4940.299999999999,"The supplier can deliver both items (500 sheets of high-quality glossy paper and 300 sheets of sturdy cardstock) by April 6, 2026, which is not suitable for the required date of April 15, 2025. It is recommended to either expedite the orders or source them from a different supplier."
+11,2025-04-08,45059.7,4940.299999999999,Successfully ordered 500 sheets of A3 glossy paper and 300 sheets of A4 matte paper for the exhibition.
+14,2025-04-09,45059.7,4940.299999999999,"It appears that the delivery request date you mentioned, April 15, 2025, has already passed since today’s date is April 9, 2026. Unfortunately, I cannot process an order for past delivery dates.
+
+If you would like to place a new order for the same items, please provide the desired delivery date, and I can assist you with that. Here’s a summary of the requested order:
+
+- 5,000 sheets of A4 paper
+- 2,000 sheets of poster paper in various colors
+- 500 sheets of cardstock
+
+Let me know the new delivery date, and I will proceed with the order!"
+15,2025-04-12,45059.7,4940.299999999999,"The orders for 10,000 sheets of A4 white paper, 5,000 sheets of A3 colored paper, and 500 reams of cardboard for signage have been successfully placed."
+16,2025-04-13,45059.7,4940.299999999999,"Order placed successfully for 500 sheets of A4 printer paper, 200 sheets of colorful construction paper, and 100 sheets of poster board."
+17,2025-04-14,45059.7,4940.299999999999,The medium order for the paper supplies has been successfully placed.
+18,2025-04-14,45059.7,4940.299999999999,"The delivery date for all paper supplies (500 sheets of high-quality white cardstock, 1000 sheets of standard printing paper, and 200 sheets of colored paper in assorted colors) will be April 6, 2026. This date is later than the required delivery date of April 15, 2025."
+19,2025-04-15,45059.7,4940.299999999999,"The supplier delivery dates are as follows:
+- A4 glossy paper (2000 sheets): Expected delivery by April 9, 2026.
+- A3 matte paper (1500 sheets): Expected delivery by April 6, 2026.
+- Cardstock (1000 sheets in assorted colors): Expected delivery by April 9, 2026.
+
+Since these items cannot be delivered by the requested deadline of April 20, 2025, you may want to consider other options."
+20,2025-04-17,45059.7,4940.299999999999,"Order placed for 5,000 flyers, 2,000 posters, and 10,000 tickets. Items will be delivered by May 15, 2025."

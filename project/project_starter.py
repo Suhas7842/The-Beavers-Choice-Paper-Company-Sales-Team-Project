@@ -587,33 +587,201 @@ def search_quote_history(search_terms: List[str], limit: int = 5) -> List[Dict]:
 ########################
 ########################
 ########################
+import os
+from typing import List, Dict
+from smolagents import ToolCallingAgent, OpenAIServerModel
+from smolagents.tools import Tool
 
+# Initialize the model using smolagents' OpenAIServerModel wrapper
+model = OpenAIServerModel(
+    model_id="gpt-4o-mini",
+    api_base="https://openai.vocareum.com/v1",
+    api_key="voc-1552948522158766457892869cd3ead7c2093.35757328"
+)
 
-# Set up and load your env parameters and instantiate your model.
-
+today = datetime.now().strftime("%Y-%m-%d")
 
 """Set up tools for your agents to use, these should be methods that combine the database functions above
  and apply criteria to them to ensure that the flow of the system is correct."""
 
 
 # Tools for inventory agent
+class GetInventoryTool(Tool):
+    name = "get_inventory_tool"
+    description = "Return all current inventory stock levels as of today."
+    inputs = {}
+    output_type = "object"
+
+    def forward(self):
+        return get_all_inventory(today)
 
 
-# Tools for quoting agent
+class CheckStockTool(Tool):
+    name = "check_stock_tool"
+    description = "Check the current stock level for a specific paper item by name."
+    inputs = {
+        "item_name": {
+            "type": "string",
+            "description": "The exact name of the item to check, e.g. 'A4 paper'."
+        }
+    }
+    output_type = "object"
+
+    def forward(self, item_name: str):
+        result = get_stock_level(item_name, today)
+        return {"item": item_name, "stock": int(result["current_stock"].iloc[0])}
 
 
-# Tools for ordering agent
+class SupplierDeliveryTool(Tool):
+    name = "supplier_delivery_tool"
+    description = "Estimate the supplier delivery date for a given item and quantity."
+    inputs = {
+        "item_name": {
+            "type": "string",
+            "description": "Name of the item being ordered."
+        },
+        "quantity": {
+            "type": "integer",
+            "description": "Number of units to order."
+        }
+    }
+    output_type = "string"
+
+    def forward(self, item_name: str, quantity: int):
+        return get_supplier_delivery_date(today, quantity)
+
+
+class QuoteLookupTool(Tool):
+    name = "quote_lookup_tool"
+    description = "Search historical quotes for similar past requests using keywords."
+    inputs = {
+        "search_terms": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "List of keywords to search for in past quotes."
+        }
+    }
+    output_type = "array"
+
+    def forward(self, search_terms: list):
+        return search_quote_history(search_terms)
+
+
+class FinancialsTool(Tool):
+    name = "financials_tool"
+    description = "Generate a financial report with cash balance, inventory value and top sellers."
+    inputs = {}
+    output_type = "object"
+
+    def forward(self):
+        return generate_financial_report(today)
+
+
+class MakeTransactionTool(Tool):
+    name = "make_transaction_tool"
+    description = "Record a sales or stock order transaction in the database."
+    inputs = {
+        "item_name": {
+            "type": "string",
+            "description": "Name of the item involved."
+        },
+        "transaction_type": {
+            "type": "string",
+            "description": "Either 'sales' or 'stock_orders'."
+        },
+        "quantity": {
+            "type": "integer",
+            "description": "Number of units involved."
+        },
+        "price": {
+            "type": "number",
+            "description": "Total price of the transaction."
+        }
+    }
+    output_type = "integer"
+
+    def forward(self, item_name: str, transaction_type: str, quantity: int, price: float):
+        return create_transaction(item_name, transaction_type, quantity, price, today)
+
+
+class CashStatusTool(Tool):
+    name = "cash_status_tool"
+    description = "Check the current available cash balance."
+    inputs = {}
+    output_type = "object"
+
+    def forward(self):
+        return {"cash_balance": get_cash_balance(today)}
+    
+
+get_inventory_tool     = GetInventoryTool()
+check_stock_tool       = CheckStockTool()
+supplier_delivery_tool = SupplierDeliveryTool()
+quote_lookup_tool      = QuoteLookupTool()
+financials_tool        = FinancialsTool()
+make_transaction_tool  = MakeTransactionTool()
+cash_status_tool       = CashStatusTool()
 
 
 # Set up your agents and create an orchestration agent that will manage them.
+class InventoryAgent(ToolCallingAgent):
+    def __init__(self):
+        super().__init__(
+            tools=[get_inventory_tool, check_stock_tool, supplier_delivery_tool],
+            model=model
+        )
 
 
-# Run your test scenarios by writing them here. Make sure to keep track of them.
+class QuoteAgent(ToolCallingAgent):
+    def __init__(self):
+        super().__init__(
+            tools=[quote_lookup_tool, financials_tool],
+            model=model
+        )
+
+
+class OrderingAgent(ToolCallingAgent):
+    def __init__(self):
+        super().__init__(
+            tools=[make_transaction_tool, cash_status_tool],
+            model=model
+        )
+
+
+class OrchestratorAgent:
+    """Routes customer queries to the appropriate specialist agent."""
+
+    def __init__(self):
+        self.inventory_agent = InventoryAgent()
+        self.quote_agent     = QuoteAgent()
+        self.ordering_agent  = OrderingAgent()
+
+    def route(self, query: str) -> str:
+        q = query.lower()
+        if any(w in q for w in ("stock", "inventory", "delivery", "available")):
+            return self.inventory_agent.run(query)
+        elif any(w in q for w in ("quote", "price", "cost", "how much")):
+            return self.quote_agent.run(query)
+        elif any(w in q for w in ("order", "buy", "purchase", "place")):
+            return self.ordering_agent.run(query)
+        else:
+            return self.inventory_agent.run(query)
+
+
+if __name__ == "__main__":
+    init_database(db_engine)
+
+    orchestrator = OrchestratorAgent()
+
+    print("=== Test Run ===")
+    print(orchestrator.route("Do we have A4 paper in stock?"))
+    print(orchestrator.route("Give me a quote for 500 sheets of A4 paper."))
+    print(orchestrator.route("Place an order for 200 sheets of A4 paper."))
 
 def run_test_scenarios():
     
     print("Initializing Database...")
-    init_database()
+    init_database(db_engine)
     try:
         quote_requests_sample = pd.read_csv("quote_requests_sample.csv")
         quote_requests_sample["request_date"] = pd.to_datetime(
@@ -638,6 +806,7 @@ def run_test_scenarios():
     ############
     ############
     ############
+    orchestrator = OrchestratorAgent()
 
     results = []
     for idx, row in quote_requests_sample.iterrows():
@@ -660,7 +829,7 @@ def run_test_scenarios():
         ############
         ############
 
-        # response = call_your_multi_agent_system(request_with_date)
+        response = orchestrator.route(request_with_date)
 
         # Update state
         report = generate_financial_report(request_date)
