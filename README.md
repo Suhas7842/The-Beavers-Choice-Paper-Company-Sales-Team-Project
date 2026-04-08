@@ -1,32 +1,78 @@
-# Purpose of This Repo
+# Beavers Choice Paper Company Sales Team Project
 
-This repo is meant to be used to keep things organized during content development and act as the source of truth for demos and exercises related to this course.
+This project simulates a **sales team workflow optimization system** for Beaver’s Choice Paper Company. It leverages machine learning and data analysis techniques to **analyze sales data, optimize team performance, and predict outcomes** for business decisions.
 
-## Folder Structure
+---
 
-### Lesson Folder
+## 📌 Project Overview
 
-This repo contains a folder for each `lesson`.
+Beaver’s Choice Paper Company requires a robust system to manage and optimize sales team operations. The goal of this project is to:
 
-Example
+- Analyze historical sales data
+- Identify key performance drivers for sales teams
+- Predict sales performance metrics
+- Provide actionable insights for decision-making
+
+This project demonstrates an end-to-end machine learning workflow, including **data preprocessing, exploratory data analysis (EDA), model training, evaluation, and reporting**.
+
+---
+
+## 🛠️ Tools & Technologies
+
+This project showcases hands-on experience with the following:
+
+| Skill / Task                 | Tools & Libraries                  |
+|-------------------------------|----------------------------------|
+| Data Handling & Analysis      | Pandas, NumPy, Matplotlib, Seaborn |
+| Machine Learning Models       | Scikit-learn, XGBoost, LightGBM   |
+| Environment & Execution       | Jupyter Notebook, AWS SageMaker   |
+| Workflow & Automation         | Python scripts, Git               |
+
+---
+
+## 📁 Folder Structure
+
+Each folder in the repository is organized for clarity:
 ```
-lesson-1-hello
-lesson-2-world
-lesson-3-foo
-lesson-4-bar
+├── data/ ← Raw and processed sales datasets
+├── notebooks/ ← Jupyter notebooks for analysis, EDA, and model training
+├── code/ ← Scripts for model building, data processing, and workflows
+├── outputs/ ← Results, metrics, visualizations, and reports
+└── README.md ← Project documentation
 ```
 
-Each `lesson` folder is named using the naming convention of `lesson-#-name-of-lesson`.
 
-Example
-```
-lesson-1-hello
-```
+---
 
-Four lesson folders have been provided as a template; However, you may need to add more or possibly use less than four depending on what is needed.
+## 🚀 Project Workflow
 
-If you require an additional lesson folder, you can make a copy of the folder and paste it into the root directory.
+1. **Data Exploration & Cleaning**  
+   - Checked for missing values, duplicates, and inconsistencies  
+   - Performed preprocessing to prepare data for modeling  
 
-### Exercises Folder
+2. **Feature Engineering**  
+   - Created derived features from sales and customer data  
+   - Encoded categorical variables and normalized numerical features  
 
-Each `lesson` folder contains an `exercises` folder. This `exercises` folder should contain all files and instructions necessary for the exercises along with the solution. The solutions for these exercises will be shared with students. See the `README` in the `exercises` folder for information about folder structure.
+3. **Model Training & Evaluation**  
+   - Trained regression and classification models to predict sales outcomes  
+   - Used metrics such as RMSE, MAE, and accuracy to evaluate performance  
+
+4. **Reporting & Insights**  
+   - Visualized results and generated dashboards to summarize insights  
+   - Highlighted key drivers of sales performance  
+
+5. **Optimization & Recommendations**  
+   - Recommended workflow improvements for the sales team  
+   - Suggested areas for further automation and data-driven decision making  
+
+---
+
+## 📈 Key Learnings
+
+- Practical application of supervised learning for business predictions  
+- End-to-end workflow from raw data to actionable insights  
+- Use of Python libraries and AWS tools for scalable solutions  
+- Understanding the impact of feature engineering on model performance  
+
+---
