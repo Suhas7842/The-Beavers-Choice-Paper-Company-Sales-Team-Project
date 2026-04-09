@@ -595,8 +595,8 @@ from smolagents.tools import Tool
 # Initialize the model using smolagents' OpenAIServerModel wrapper
 model = OpenAIServerModel(
     model_id="gpt-4o-mini",
-    api_base="https://openai.vocareum.com/v1",
-    api_key="voc-1552948522158766457892869cd3ead7c2093.35757328"
+    api_base="YOUR_OPENAI_BASE_URL",
+    api_key="YOUR_OPENAI_API_KEY"
 )
 
 today = datetime.now().strftime("%Y-%m-%d")
